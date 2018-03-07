@@ -4,12 +4,16 @@ import fetch from 'isomorphic-unfetch'
 import Layout from '../components/Layout.js'
 
 class Index extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
   render () {
     return <Layout>
       {/* DOM */}
       <h1>Batman TV Shows</h1>
       <ul>
-        {props.shows.map(({show}) => (
+        {this.props.shows.map(({show}) => (
           <li key={show.id}>
             <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
               <a>{show.name}</a>

@@ -61,7 +61,7 @@ if (env == "production") {
 const next        = require('next');
 
 // App
-const app         = next({ env });
+const app         = next({dir:'./src', env });
 const handle      = app.getRequestHandler();
 
 // Config
