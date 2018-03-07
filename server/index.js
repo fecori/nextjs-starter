@@ -127,7 +127,7 @@ app.prepare().then(() => {
       // No SSL on port 80.
       httpServer.listen(PORT, (err) => {
         if (err) throw err
-        console.log('> Ready on https://localhost:' + PORT);
+        console.log('> Ready on http://localhost:' + PORT);
       });
 
       httpsServer.listen(SSL_PORT, (err) => {
