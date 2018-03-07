@@ -7,7 +7,7 @@
     "dev-offline": "next",
     "dev": "yarn build && NODE_ENV='development' yarn start",
     "prod": "yarn build && NODE_ENV='production' yarn start",
-    "build": "next build",
+    "build": "next build src",
     "start": "node server.js",
     "start-prod": "NODE_ENV='production' yarn run build && forever start -c 'yarn start' ./",
     "stop-prod": "forever stop ./",
