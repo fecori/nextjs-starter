@@ -96,7 +96,15 @@ app.prepare().then(() => {
   });
 
   serverApp.get('*', cache(10), (req, res) => {
-    return handle(req, res)
+    const parsedUrl = parse(req.url, true);
+    const { pathname } = parsedUrl;
+
+    if (pathname === '/sw.js') {
+      res.setHeader('content-type', 'text/javascript');
+      fs.createReadStream('./offline/serviceWorker.js').pipe(res);
+    } else {
+      handle(req, res, parsedUrl);
+    }
   });
 
   switch (env) {
