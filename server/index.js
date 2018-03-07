@@ -34,6 +34,8 @@ if (env == "production") {
         console.error(new Error('An error occured while trying to read your SSL Private Key.'));
       }
     }
+
+    return;
   }
 
   // Setting SSL Certificate and handling potential errors
@@ -54,6 +56,8 @@ if (env == "production") {
         console.error(new Error('An error occured while trying to read your SSL Certificate.'));
       }
     }
+
+    return;
   }
 }
 
