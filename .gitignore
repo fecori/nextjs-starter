@@ -1,1 +1,4 @@
 nodes_modules
+.next
+src/.next
+yarn-error.log
