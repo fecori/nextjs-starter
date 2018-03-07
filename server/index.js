@@ -71,7 +71,8 @@ const app         = next({dir:'./src', env });
 const handle      = app.getRequestHandler();
 
 // Config
-const PORT        = env == 'development' ? 3000 : 443;
+const PORT        = env == 'development' ? 3000 : 80;
+const SSL_PORT    = 443;
 const cache       = (duration) => {
   return (req, res, next) => {
     let key = '__express__' + req.originalUrl || req.url
@@ -105,6 +106,9 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
 
+    if (env == 'production' && !req.connection.encrypted)
+      res.redirect('https://' + req.headers.host + req.url);
+
     if (pathname === '/sw.js') {
       res.setHeader('content-type', 'text/javascript');
       fs.createReadStream('./static/serviceWorker.js').pipe(res);
@@ -119,10 +123,18 @@ app.prepare().then(() => {
       console.log('> Ready on http://localhost:' + PORT);
     }); break;
 
-    case 'production': httpsServer.listen(PORT, (err) => {
-      if (err) throw err
-      console.log('> Ready on https://localhost:' + PORT);
-    }); break;
+    case 'production': {
+      // No SSL on port 80.
+      httpServer.listen(PORT, (err) => {
+        if (err) throw err
+        console.log('> Ready on https://localhost:' + PORT);
+      });
+
+      httpsServer.listen(SSL_PORT, (err) => {
+        if (err) throw err
+        console.log('> Ready on https://localhost:' + SSL_PORT);
+      });
+    } break;
   }
 })
 .catch((ex) => {
