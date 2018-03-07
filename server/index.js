@@ -11,15 +11,15 @@ const env         = process.env.NODE_ENV;
 
 //SSL
 const domain      = 'mydomain.com';
-const privateKey  = null;
-const certificate = null;
+var   privateKey  = null;
+var   certificate = null;
 
 // Setting SSL if production only
 if (env == "production") {
   // Setting SSL Private Key and handling potential errors
   try {
     privateKey = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/privkey.pem', 'utf8'); // --> https://letsencrypt.org/
-    console.log('Successfuly retrieving SSL private key', privateKey);
+    console.log('Successfuly retrieving SSL private key\n', privateKey);
   } catch(err) {
     switch(err.code) {
       case 'ENOENT': {
@@ -32,6 +32,7 @@ if (env == "production") {
 
       default: {
         console.error(new Error('An error occured while trying to read your SSL Private Key.'));
+        console.error(new Error(err));
       }
     }
 
@@ -41,7 +42,7 @@ if (env == "production") {
   // Setting SSL Certificate and handling potential errors
   try {
     certificate = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/cert.pem', 'utf8'); // --> https://letsencrypt.org/
-    console.log('Successfuly retrieving SSL certificate', certificate);
+    console.log('Successfuly retrieving SSL certificate\n', certificate);
   } catch(err) {
     switch(err.code) {
       case 'ENOENT': {
@@ -54,6 +55,7 @@ if (env == "production") {
 
       default: {
         console.error(new Error('An error occured while trying to read your SSL Certificate.'));
+        console.error(new Error(err));
       }
     }
 
