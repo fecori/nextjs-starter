@@ -6,45 +6,53 @@ const fs          = require('fs');
 const http        = require('http');
 const https       = require('https');
 
+//Environment
+const env         = process.env.NODE_ENV;
+
 //SSL
 const domain      = 'mydomain.com';
 const privateKey  = null;
 const certificate = null;
 
-try {
-  privateKey = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/privkey.pem', 'utf8'); // --> https://letsencrypt.org/
-  console.log('Successfuly retrieving SSL private key', privateKey);
-} catch(err) {
-  switch(err.code) {
-    case 'ENOENT': {
-      console.error(new Error('SSL Private Key not Found.'));
-    }; break;
+// Setting SSL if production only
+if (env == "production") {
+  // Setting SSL Private Key and handling potential errors
+  try {
+    privateKey = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/privkey.pem', 'utf8'); // --> https://letsencrypt.org/
+    console.log('Successfuly retrieving SSL private key', privateKey);
+  } catch(err) {
+    switch(err.code) {
+      case 'ENOENT': {
+        console.error(new Error('SSL Private Key not Found.'));
+      }; break;
 
-    case 'EACCES': {
-      console.error(new Error('EACCES: you need to authentify as an admin to read your SSL Private Key.'));
-    }; break;
+      case 'EACCES': {
+        console.error(new Error('EACCES: you need to authentify as an admin to read your SSL Private Key.'));
+      }; break;
 
-    default: {
-      console.error(new Error('An error occured while trying to read your SSL Private Key.'));
+      default: {
+        console.error(new Error('An error occured while trying to read your SSL Private Key.'));
+      }
     }
   }
-}
 
-try {
-  certificate = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/cert.pem', 'utf8'); // --> https://letsencrypt.org/
-  console.log('Successfuly retrieving SSL certificate', certificate);
-} catch(err) {
-  switch(err.code) {
-    case 'ENOENT': {
-      console.error(new Error('SSL Certificate not Found.'));
-    }; break;
+  // Setting SSL Certificate and handling potential errors
+  try {
+    certificate = fs.readFileSync('/etc/letsencrypt/live/'+domain+'/cert.pem', 'utf8'); // --> https://letsencrypt.org/
+    console.log('Successfuly retrieving SSL certificate', certificate);
+  } catch(err) {
+    switch(err.code) {
+      case 'ENOENT': {
+        console.error(new Error('SSL Certificate not Found.'));
+      }; break;
 
-    case 'EACCES': {
-      console.error(new Error('EACCES: you need to authentify as an admin to read your SSL Certificate.'));
-    }; break;
+      case 'EACCES': {
+        console.error(new Error('EACCES: you need to authentify as an admin to read your SSL Certificate.'));
+      }; break;
 
-    default: {
-      console.error(new Error('An error occured while trying to read your SSL Certificate.'));
+      default: {
+        console.error(new Error('An error occured while trying to read your SSL Certificate.'));
+      }
     }
   }
 }
@@ -53,7 +61,6 @@ try {
 const next        = require('next');
 
 // App
-const env         = process.env.NODE_ENV;
 const app         = next({ env });
 const handle      = app.getRequestHandler();
 
