@@ -1,3 +1,5 @@
+const config      = require('../config');
+
 // Serving dependencies
 const express     = require('express');
 const compression = require('compression');
