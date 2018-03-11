@@ -41,10 +41,11 @@ $ npm run dev
 ```
 
 ## Production:
-For production, you first need to create an SSL certificate for your domain. The fastest and most inexpensive option is to use [Let's Encrypt](https://letsencrypt.org/). When you're done producing your SSL certificate, make sure that your domain is defined in __server/index.js__. You can modify this file the following way :
+For production, you first need to create an SSL certificate for your domain. The fastest and most inexpensive option is to use [Let's Encrypt](https://letsencrypt.org/). When you're done producing your SSL certificate, make sure that your domain is defined in __config/server.js__. You can modify this file the following way :
 ```javascript
-//SSL
-const domain      = 'mydomain.com';
+const serverConfig = {
+  domain: 'mydomain.com' // <-- your domain name here
+}
 ```
 
 ### Testing production
