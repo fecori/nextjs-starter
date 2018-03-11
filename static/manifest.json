@@ -1,0 +1,32 @@
+{
+  "name": "myapp",
+  "short_name": "MA",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#FFF",
+  "icons": [
+    {
+      "src": "./icon.png"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "ios",
+      "id": "com.my.app",
+      "url": "https://download.myapp.com/"
+    }
+  ],
+  "prefer_related_applications": true,
+  "screenshots": [
+    {
+      "src": "screen1"
+    },
+    {
+      "src": "screen2"
+    },
+    {
+      "src": "screen3"
+    }
+  ]
+}
