@@ -13,8 +13,6 @@ const env         = process.env.NODE_ENV;
 //Project config
 const config      = require('../config');
 
-console.log(config);
-
 //SSL
 const domain      = config.server.domain; //config.server.domain
 var   privateKey  = null;
