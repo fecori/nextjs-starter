@@ -6,11 +6,17 @@ const fs          = require('fs');
 const http        = require('http');
 const https       = require('https');
 const {parse}     = require('url');
+
 //Environment
 const env         = process.env.NODE_ENV;
 
+//Project config
+const config      = require('../config');
+
+console.log(config);
+
 //SSL
-const domain      = 'mydomain.com';
+const domain      = config.server.domain; //config.server.domain
 var   privateKey  = null;
 var   certificate = null;
 
@@ -70,7 +76,7 @@ const next        = require('next');
 const app         = next({dir:'./src', env });
 const handle      = app.getRequestHandler();
 
-// Config
+// General server config
 const PORT        = env == 'development' ? 3000 : 80;
 const SSL_PORT    = 443;
 const cache       = (duration) => {
