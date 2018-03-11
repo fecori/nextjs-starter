@@ -115,10 +115,10 @@ app.prepare().then(() => {
 
     if (pathname === '/sw.js') {
       res.setHeader('content-type', 'text/javascript');
-      fs.createReadStream('./static/serviceWorker.js').pipe(res);
+      fs.createReadStream('./public/serviceWorker.js').pipe(res);
     } else if (pathname === '/manifest.json') {
       res.setHeader('content-type', 'application/json');
-      fs.createReadStream('./static/manifest.json').pipe(res);
+      fs.createReadStream('./public/manifest.json').pipe(res);
     } else {
       handle(req, res, parsedUrl);
     }
