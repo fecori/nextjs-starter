@@ -1,0 +1,7 @@
+;
+
+(function () {
+  "use strict";
+
+  module.exports = ".header {\n  background-color:#0FF;\n}\n\n.header .logo {\n\n}\n";
+})();

@@ -1,0 +1,48 @@
+{
+  "name": "hello-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-hot": "NODE_ENV='development' && next src",
+    "dev": "yarn build && NODE_ENV='development' yarn start",
+    "prod": "yarn build && NODE_ENV='production' yarn start",
+    "build": "next build src",
+    "start": "node server/index.js",
+    "start-prod": "NODE_ENV='production' yarn run build && forever start -c 'yarn start' ./",
+    "stop-prod": "forever stop ./",
+    "kill-dev": "kill -9 $(lsof -t -i:3000)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^8.1.0",
+    "babel-plugin-module-resolver": "^3.1.0",
+    "babel-plugin-wrap-in-js": "^1.1.1",
+    "compression": "^1.7.2",
+    "express": "^4.16.2",
+    "file-loader": "^1.1.11",
+    "glob": "^7.1.2",
+    "http": "^0.0.0",
+    "https": "^1.0.0",
+    "image-webpack-loader": "^3.6.0",
+    "imagemin-webpack-plugin": "^2.1.0",
+    "isomorphic-unfetch": "^2.0.0",
+    "memory-cache": "^0.2.0",
+    "next": "^6.0.0",
+    "node-sass": "^4.7.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-loader": "^2.1.1",
+    "raw-loader": "^0.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.7",
+    "spdy": "^3.4.7",
+    "url-loader": "^1.0.1"
+  },
+  "devDependencies": {
+    "image-trace-loader": "^0.1.0",
+    "sqip-loader": "^0.1.0"
+  }
+}
